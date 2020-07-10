@@ -111,7 +111,7 @@ int compute_vmaf(double* vmaf_score, char* fmt, int width, int height,
         .log_level = VMAF_LOG_LEVEL_INFO,
         .n_threads = n_thread,
         .n_subsample = n_subsample,
-        .cpumask = disable_avx,
+        .cpumask = disable_avx ? -1 : 0,
     };
 
     VmafContext *vmaf;
