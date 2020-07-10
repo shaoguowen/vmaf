@@ -6,12 +6,14 @@
 
 static enum VmafOutputFormat log_fmt_map(const char *log_fmt)
 {
-    if (!strcmp(log_fmt, "xml"))
-        return VMAF_OUTPUT_FORMAT_XML;
-    if (!strcmp(log_fmt, "json"))
-        return VMAF_OUTPUT_FORMAT_JSON;
-    if (!strcmp(log_fmt, "csv"))
-        return VMAF_OUTPUT_FORMAT_CSV;
+    if (log_fmt) {
+        if (!strcmp(log_fmt, "xml"))
+            return VMAF_OUTPUT_FORMAT_XML;
+        if (!strcmp(log_fmt, "json"))
+            return VMAF_OUTPUT_FORMAT_JSON;
+        if (!strcmp(log_fmt, "csv"))
+            return VMAF_OUTPUT_FORMAT_CSV;
+    }
 
     return VMAF_OUTPUT_FORMAT_NONE;
 }
@@ -32,18 +34,20 @@ static enum VmafPoolingMethod pool_method_map(const char *pool_method)
 
 static int pix_fmt_map(char *fmt)
 {
-    if (!strcmp(fmt, "yuv420p"))
-        return VMAF_PIX_FMT_YUV420P;
-    if (!strcmp(fmt, "yuv422p"))
-        return VMAF_PIX_FMT_YUV422P;
-    if (!strcmp(fmt, "yuv444p"))
-        return VMAF_PIX_FMT_YUV444P;
-    if (!strcmp(fmt, "yuv420p10le"))
-        return VMAF_PIX_FMT_YUV420P;
-    if (!strcmp(fmt, "yuv422p10le"))
-        return VMAF_PIX_FMT_YUV422P;
-    if (!strcmp(fmt, "yuv444p10le"))
-        return VMAF_PIX_FMT_YUV444P;
+    if (fmt) {
+        if (!strcmp(fmt, "yuv420p"))
+            return VMAF_PIX_FMT_YUV420P;
+        if (!strcmp(fmt, "yuv422p"))
+            return VMAF_PIX_FMT_YUV422P;
+        if (!strcmp(fmt, "yuv444p"))
+            return VMAF_PIX_FMT_YUV444P;
+        if (!strcmp(fmt, "yuv420p10le"))
+            return VMAF_PIX_FMT_YUV420P;
+        if (!strcmp(fmt, "yuv422p10le"))
+            return VMAF_PIX_FMT_YUV422P;
+        if (!strcmp(fmt, "yuv444p10le"))
+            return VMAF_PIX_FMT_YUV444P;
+    }
 
     return VMAF_PIX_FMT_UNKNOWN;
 
