@@ -14,6 +14,17 @@ vmafossexec = executable(
     install : true,
 )
 
+vmafossexec_rc = executable(
+    'vmafossexec_rc',
+    [src_dir + 'main.cpp', src_dir + 'read_frame.c'],
+    include_directories : libvmaf_inc,
+    dependencies: [stdatomic_dependency],
+    c_args : vmaf_cflags_common,
+    cpp_args : vmaf_cflags_common,
+    link_with : libvmaf_rc.get_static_lib(),
+    install : false,
+)
+
 vmaf_rc = executable(
     'vmaf_rc',
     ['vmaf.c', 'cli_parse.c', 'y4m_input.c', 'vidinput.c', 'yuv_input.c'],
