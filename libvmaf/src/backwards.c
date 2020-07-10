@@ -18,14 +18,16 @@ static enum VmafOutputFormat log_fmt_map(const char *log_fmt)
 
 static enum VmafPoolingMethod pool_method_map(const char *pool_method)
 {
-    if (!strcmp(pool_method, "min"))
-        return VMAF_POOL_METHOD_MIN;
-    if (!strcmp(pool_method, "mean"))
-        return VMAF_POOL_METHOD_MEAN;
-    if (!strcmp(pool_method, "harmonic_mean"))
-        return VMAF_POOL_METHOD_HARMONIC_MEAN;
+    if (pool_method) {
+        if (!strcmp(pool_method, "min"))
+            return VMAF_POOL_METHOD_MIN;
+        if (!strcmp(pool_method, "mean"))
+            return VMAF_POOL_METHOD_MEAN;
+        if (!strcmp(pool_method, "harmonic_mean"))
+            return VMAF_POOL_METHOD_HARMONIC_MEAN;
+    }
 
-    return VMAF_POOL_METHOD_UNKNOWN;
+    return VMAF_POOL_METHOD_MEAN;
 }
 
 static int pix_fmt_map(char *fmt)
@@ -96,7 +98,7 @@ int compute_vmaf(double* vmaf_score, char* fmt, int width, int height,
 				 int do_ssim, int do_ms_ssim, char *pool_method,
                  int n_thread, int n_subsample, int enable_conf_interval)
 {
-    fprintf(stderr, "the `compute_vmaf()` api call is deprecated "
+    fprintf(stderr, "[LIBVMAF] `compute_vmaf()` is deprecated "
                     "and will be removed in a future libvmaf version\n");
 
     int err = 0;
@@ -133,6 +135,13 @@ int compute_vmaf(double* vmaf_score, char* fmt, int width, int height,
     err = vmaf_model_load_from_path(&model, &model_cfg);
     if (err) {
         fprintf(stderr, "problem loading model file: %s\n", model_cfg.path);
+        goto end;
+    }
+    err = vmaf_use_features_from_model(vmaf, model);
+    if (err) {
+        fprintf(stderr,
+                "problem loading feature extractors from model file: %s\n",
+                model_cfg.path);
         goto end;
     }
 
