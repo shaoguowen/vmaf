@@ -205,10 +205,13 @@ int compute_vmaf(double* vmaf_score, char* fmt, int width, int height,
             goto free_data;
         }
 
-        if (pix_fmt_map(fmt) > 8)
+        if (pix_fmt_map(fmt) > 8) {
             copy_data_hbd(ref_data, &pic_ref, width, height, stride);
-        else
+            copy_data_hbd(dist_data, &pic_dist, width, height, stride);
+        } else {
             copy_data(ref_data, &pic_ref, width, height, stride);
+            copy_data(dist_data, &pic_dist, width, height, stride);
+        }
             
 
         err = vmaf_read_pictures(vmaf, &pic_ref, &pic_dist, picture_index);
