@@ -32,6 +32,22 @@ static Alias alias_map[] = {
         .alias = "integer_adm2",
     },
     {
+        .name = "'VMAF_feature_adm_scale0_score'",
+        .alias = "adm_scale0",
+    },
+    {
+        .name = "'VMAF_feature_adm_scale1_score'",
+        .alias = "adm_scale1",
+    },
+    {
+        .name = "'VMAF_feature_adm_scale2_score'",
+        .alias = "adm_scale2",
+    },
+    {
+        .name = "'VMAF_feature_adm_scale3_score'",
+        .alias = "adm_scale3",
+    },
+    {
         .name = "'VMAF_feature_motion2_score'",
         .alias = "motion2",
     },
