@@ -32,7 +32,7 @@ RUN pip3 install --no-cache-dir meson
 ENV PATH=/vmaf:/vmaf/libvmaf/build/tools:$PATH
 
 # make vmaf
-RUN cd /vmaf && make clean && make
+RUN cd /vmaf && make
 
 # install python tools
 RUN pip3 install --no-cache-dir /vmaf/python
