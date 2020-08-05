@@ -26,15 +26,14 @@ COPY . /vmaf
 
 # install python requirements
 RUN pip3 install --upgrade pip
-RUN pip3 install --no-cache-dir meson
+RUN pip3 install numpy scipy matplotlib notebook pandas sympy cython nose scikit-learn scikit-image h5py sureal meson
 
 # setup environment
-ENV PATH=/vmaf:/vmaf/libvmaf/build/tools:$PATH
+ENV PYTHONPATH=/vmaf/python/src:/vmaf:$PYTHONPATH
+ENV PATH=/vmaf:/vmaf/src/libvmaf:$PATH
+
 
 # make vmaf
 RUN cd /vmaf && make
-
-# install python tools
-RUN pip3 install --no-cache-dir /vmaf/python
 
 WORKDIR /root/
